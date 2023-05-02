@@ -8,6 +8,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -25,6 +26,7 @@ dependencies {
 
 
     dependencies {
+        // graphics
         api("com.badlogicgames.ashley:ashley:$ashleyVersion")
         api("com.badlogicgames.box2dlights:box2dlights:$box2dlightsVersion")
         api("com.badlogicgames.gdx:gdx-ai:$aiVersion")
@@ -41,6 +43,15 @@ dependencies {
         implementation("com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion")
         implementation("com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop")
         implementation("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop")
+
+        // game logic
+        implementation("com.delta:game-logic:1.0.0")
+
+        // networking
+        val ktorVersion = "2.2.4"
+        implementation("io.ktor:ktor-client-core:$ktorVersion")
+        implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+        implementation("ch.qos.logback:logback-classic:1.4.5")
     }
 }
 
