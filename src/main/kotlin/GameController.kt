@@ -13,23 +13,23 @@ import io.ktor.serialization.gson.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.text.get
 
 class GameController(
-    private val serverAddress: String,
-    private val playersName: String
+    val appConfig: AppConfig = AppConfig()
 ) {
     data class Player(val id: String, val pwd: String)
-
-    val httpPort: String = "8080"
-
     var gameStarted: Boolean = false
 
     var player: Player? = null
     var playerID: PlayerID? = null
     private var gameState: GameLogic? = null
 
-    val listener = WebSocketListener(this::updateGameState)
+    val fullServerAddress = "${appConfig.serverAddress}:${AppConfig.httpPort}"
+
+    val listener = WebSocketListener(
+        AppConfig(),
+        this::updateGameState
+    )
 
     val client = HttpClient(OkHttp) {
         install(ContentNegotiation) {
@@ -56,8 +56,8 @@ class GameController(
     fun tryLogin() {
         runBlocking {
             val response: HttpResponse = client.post {
-                url("$serverAddress:$httpPort/login")
-                parameter("id", playersName)
+                url("$fullServerAddress/login")
+                parameter("id", appConfig.playersName)
                 parameter("server_pwd", "Delta!!!")
             }
 
@@ -72,7 +72,7 @@ class GameController(
     fun tryAskPlayerId() {
         runBlocking {
             val response: HttpResponse = client.get {
-                url("$serverAddress:$httpPort/playerID")
+                url("$fullServerAddress/playerID")
                 parameter("id", player?.id)
                 parameter("pwd", player?.pwd)
             }
@@ -88,7 +88,7 @@ class GameController(
     fun askToPlaceCell(raw: Int, col: Int) {
         runBlocking {
             val response: HttpResponse = client.post {
-                url("$serverAddress:$httpPort/placeCell")
+                url("$fullServerAddress/placeCell")
                 parameter("id", player?.id)
                 parameter("pwd", player?.pwd)
                 parameter("raw", raw.toString())
@@ -104,7 +104,7 @@ class GameController(
     fun askToEndTurn() {
         runBlocking {
             val response: HttpResponse = client.post {
-                url("$serverAddress:$httpPort/placeCell")
+                url("$fullServerAddress/placeCell")
                 parameter("id", player?.id)
                 parameter("pwd", player?.pwd)
             }

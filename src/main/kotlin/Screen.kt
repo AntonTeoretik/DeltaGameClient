@@ -22,7 +22,7 @@ class Screen() : KtxScreen {
     val camera = Camera()
 //    val camera = OrthographicCamera()
 
-    var text = "";
+    var text = ""
 
     // Create the frame buffer and blur shader program
 

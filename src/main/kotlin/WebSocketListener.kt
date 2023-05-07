@@ -9,19 +9,21 @@ import io.ktor.websocket.*
 import java.net.URI
 import kotlin.reflect.KFunction1
 
-class WebSocketListener(private val updateFunction: KFunction1<GameLogic, Unit>) {
+class WebSocketListener(
+    private val appConfig: AppConfig,
+    private val updateFunction: KFunction1<GameLogic, Unit>
+) {
     suspend fun start() {
         val client = HttpClient(OkHttp) {
             install(WebSockets)
         }
 
-        val serverUri = URI.create("http://192.168.178.48:8081/game") //TODO abstract this
-
+        val serverUri = URI.create("${appConfig.serverAddress}:${AppConfig.webSocketPort}/game")
         client.ws(
             method = HttpMethod.Get,
             host = serverUri.host,
             port = serverUri.port,
-            path = serverUri.path + "?id=Anton", // TODO abstract this
+            path = serverUri.path + "?id=${appConfig.playersName}",
         ) {
             try {
                 // Connection succeeded
