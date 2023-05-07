@@ -51,7 +51,14 @@ dependencies {
         val ktorVersion = "2.2.4"
         implementation("io.ktor:ktor-client-core:$ktorVersion")
         implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+        implementation("io.ktor:ktor-client-logging:$ktorVersion")
+        implementation("io.ktor:ktor-client-json:$ktorVersion")
+        implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+
         implementation("ch.qos.logback:logback-classic:1.4.5")
+        implementation("io.ktor:ktor-serialization-gson:$ktorVersion")
+        implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
     }
 }
 

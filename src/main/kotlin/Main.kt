@@ -1,20 +1,29 @@
 package com.delta
 
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputMultiplexer
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.plugins.websocket.*
-import io.ktor.http.*
-import io.ktor.websocket.*
-import kotlinx.coroutines.runBlocking
-import java.net.URI
+class Game : KtxGame<KtxScreen>() {
+    override fun create() {
+        // Set the initial screen to the menu screen
+        val screen = Screen()
+        addScreen(screen)
+        setScreen<Screen>()
 
+        // Set up input handling
+        val inputMultiplexer = InputMultiplexer()
+        inputMultiplexer.addProcessor(CameraController(screen))
+        Gdx.input.inputProcessor = inputMultiplexer
 
-interface GameUI {
+    }
+}
+
+class GraphicsComponent() {
 
 }
 
@@ -22,62 +31,41 @@ class UI() : KtxGame<KtxScreen>() {
 
 }
 
-class WebController() {
-    suspend fun start() {
-        val client = HttpClient(OkHttp) {
-            install(WebSockets)
-        }
-
-        val serverUri = URI.create("http://192.168.178.48:8081/game")
-
-        client.ws(
-            method = HttpMethod.Get,
-            host = serverUri.host,
-            port = serverUri.port,
-            path = serverUri.path + "?id=Anton",
-        ) {
-            try {
-                // Connection succeeded
-                println("Connected to WebSocket server")
-
-                // Read messages from the server
-                for (message in incoming) {
-                    if (message is Frame.Text) {
-                        val text = message.readText()
-                        println("Received message: $text")
-                    }
-                }
-
-            } finally {
-
-            }
-        }
-
-        client.close()
-    }
-}
-
-class GameController() {
-    data class Player(val id: String, val pwd: String)
-
-    val player: Player? = null
-    val playerID: PlayerID? = null
-
-    val gameState: GameLogic? = null
-
-    fun start() {}
-    fun updateGameState() {}
-
+class Application(
+    private val gameController: GameController,
+    private val graphicsComponent: GraphicsComponent
+) {
 
 }
 
 /** Launches the desktop (LWJGL3) application. */
-fun main() {
+fun main(args: Array<String>) {
+    val serverAddress = "http://192.168.178.48"
+    val playersName = "Anton"
+
+    val game1 = GameController(serverAddress, "A")
+    val game2 = GameController(serverAddress, "B")
+    val game3 = GameController(serverAddress, "C")
+    val game4 = GameController(serverAddress, "D")
+
 
     runBlocking {
-        val client = WebController()
-        client.start()
+        coroutineScope {
+            launch {
+                game1.start()
+            }
+            launch {
+                game2.start()
+            }
+            launch {
+                game3.start()
+            }
+            launch {
+                game4.start()
+            }
+        }
     }
+
 
 //    Lwjgl3Application(UI(), Lwjgl3ApplicationConfiguration().apply {
 //        setTitle("Delta!")
