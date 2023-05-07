@@ -1,31 +1,11 @@
 package com.delta
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.InputMultiplexer
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
-class Game : KtxGame<KtxScreen>() {
-    override fun create() {
-        // Set the initial screen to the menu screen
-        val screen = Screen()
-        addScreen(screen)
-        setScreen<Screen>()
-
-        // Set up input handling
-        val inputMultiplexer = InputMultiplexer()
-        inputMultiplexer.addProcessor(CameraController(screen))
-        Gdx.input.inputProcessor = inputMultiplexer
-
-    }
-}
-
-class GraphicsComponent() {
-
-}
 
 class UI() : KtxGame<KtxScreen>() {
 

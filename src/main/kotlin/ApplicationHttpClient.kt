@@ -87,7 +87,7 @@ class ApplicationHttpClient(
     fun askToEndTurn() : Boolean {
         return runBlocking {
             val response: HttpResponse = client.post {
-                url("$fullServerAddress/placeCell")
+                url("$fullServerAddress/endPlayersTurn")
                 parameter("id", player?.id)
                 parameter("pwd", player?.pwd)
             }

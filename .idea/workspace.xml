@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Exclude configuration details to AppConfig">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/GamePhase.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/GameState.kt" afterDir="false" />
+    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Some refactor, split functionality into several classes">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Camera.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Camera.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683476999885</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Some refactor, split functionality into several classes">
+      <created>1683479506223</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683479506223</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Some refactor, split functionality into several classes">
+      <created>1683479649632</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683479649632</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Some refactor, split functionality into several classes">
+      <created>1683479668367</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1683479668367</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -118,6 +137,7 @@
     <MESSAGE value="Add initial example of websocket client" />
     <MESSAGE value="Create camera class and its controller" />
     <MESSAGE value="Exclude configuration details to AppConfig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exclude configuration details to AppConfig" />
+    <MESSAGE value="Some refactor, split functionality into several classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some refactor, split functionality into several classes" />
   </component>
 </project>
