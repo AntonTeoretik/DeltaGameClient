@@ -14,15 +14,14 @@ import ktx.app.KtxScreen
 
 
 class Screen() : KtxScreen {
-    private var mapZoom = 1.0f
     private var mapPosition = Vector3(0.0f, 0.0f, 0.0f)
+
     private val viewport = FitViewport(10f * Gdx.graphics.width / Gdx.graphics.height, 10f)
     private val uiViewport = ScreenViewport()
 
     val camera = Camera()
-//    val camera = OrthographicCamera()
 
-    var text = ""
+    private var text = ""
 
     // Create the frame buffer and blur shader program
 
@@ -45,19 +44,13 @@ class Screen() : KtxScreen {
     }
 
     override fun render(delta: Float) {
-
         viewport.apply()
         // Set the viewport to the correct size and position
         camera.update()
         mapPosition.set(camera.getPosition())
 
-
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1.0f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-
-
-        // render grid
-        //drawCartesianGrid(10, 10, 1f, Color.YELLOW)
 
         uiViewport.apply()
         //Display text

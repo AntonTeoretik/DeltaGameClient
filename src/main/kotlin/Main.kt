@@ -41,26 +41,15 @@ class Application(
 /** Launches the desktop (LWJGL3) application. */
 fun main(args: Array<String>) {
     val serverAddress = "http://192.168.178.48"
+    val playersName = "Anton"
 
-    val game1 = GameController(AppConfig("A", serverAddress))
-    val game2 = GameController(AppConfig("A", serverAddress))
-    val game3 = GameController(AppConfig("A", serverAddress))
-    val game4 = GameController(AppConfig("A", serverAddress))
-
+    val gameState = GameState()
+    val game1 = GameController(gameState, AppConfig(playersName, serverAddress))
 
     runBlocking {
         coroutineScope {
             launch {
                 game1.start()
-            }
-            launch {
-                game2.start()
-            }
-            launch {
-                game3.start()
-            }
-            launch {
-                game4.start()
             }
         }
     }
