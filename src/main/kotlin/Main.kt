@@ -1,5 +1,7 @@
 package com.delta
 
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -7,14 +9,31 @@ import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
 
-class UI() : KtxGame<KtxScreen>() {
+class Application(appConfig: AppConfig) {
+    private var gameController : GameController
+    private var graphicsComponent : GraphicsComponent
 
-}
+    init {
+        val gameState = GameState()
+        gameController = GameController(gameState, appConfig)
+        graphicsComponent = GraphicsComponent(gameState, appConfig, gameController)
+    }
 
-class Application(
-    private val gameController: GameController,
-    private val graphicsComponent: GraphicsComponent
-) {
+    fun start() {
+        runBlocking {
+            coroutineScope {
+                launch {
+                    gameController.start()
+                }
+                launch {
+                    Lwjgl3Application(graphicsComponent, Lwjgl3ApplicationConfiguration().apply {
+                        setTitle("Delta!")
+                        setWindowedMode(640, 480)
+                    })
+                }
+            }
+        }
+    }
 
 }
 
@@ -24,19 +43,8 @@ fun main(args: Array<String>) {
     val playersName = "Anton"
 
     val gameState = GameState()
-    val game1 = GameController(gameState, AppConfig(playersName, serverAddress))
+    val game = GameController(gameState, AppConfig(playersName, serverAddress))
 
-    runBlocking {
-        coroutineScope {
-            launch {
-                game1.start()
-            }
-        }
-    }
-
-
-//    Lwjgl3Application(UI(), Lwjgl3ApplicationConfiguration().apply {
-//        setTitle("Delta!")
-//        setWindowedMode(640, 480)
-//    })
+    val app = Application(AppConfig(playersName, serverAddress))
+    app.start()
 }

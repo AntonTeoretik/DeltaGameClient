@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Some refactor, split functionality into several classes">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
+    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Implement game logic controller, create prototype for graphics component">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/DynamicColor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/CameraController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/CameraController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683479668367</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implement game logic controller, create prototype for graphics component">
+      <created>1683482203772</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683482203772</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -138,6 +147,7 @@
     <MESSAGE value="Create camera class and its controller" />
     <MESSAGE value="Exclude configuration details to AppConfig" />
     <MESSAGE value="Some refactor, split functionality into several classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some refactor, split functionality into several classes" />
+    <MESSAGE value="Implement game logic controller, create prototype for graphics component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement game logic controller, create prototype for graphics component" />
   </component>
 </project>

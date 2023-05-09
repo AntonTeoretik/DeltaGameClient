@@ -12,16 +12,19 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import ktx.app.KtxScreen
 
+class Screen(
+    val gameState: GameState,
+    val gameConfig: AppConfig
+) : KtxScreen {
+    val backgroundColor = DynamicColor(Color.BLACK, 0.1f)
 
-class Screen() : KtxScreen {
     private var mapPosition = Vector3(0.0f, 0.0f, 0.0f)
 
     private val viewport = FitViewport(10f * Gdx.graphics.width / Gdx.graphics.height, 10f)
     private val uiViewport = ScreenViewport()
 
     val camera = Camera()
-
-    private var text = ""
+    private var text = gameConfig.playersName
 
     // Create the frame buffer and blur shader program
 
@@ -44,13 +47,18 @@ class Screen() : KtxScreen {
     }
 
     override fun render(delta: Float) {
+        backgroundColor.update(delta)
+
         viewport.apply()
         // Set the viewport to the correct size and position
         camera.update()
         mapPosition.set(camera.getPosition())
 
-        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1.0f)
+        val col = backgroundColor.getColor()
+        Gdx.gl.glClearColor(col.r, col.g, col.b, col.a)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+
+        drawCartesianGrid(10, 10, 1f, Color.BLUE)
 
         uiViewport.apply()
         //Display text
@@ -60,13 +68,32 @@ class Screen() : KtxScreen {
     private val batch = SpriteBatch()
     private val shapeRenderer = ShapeRenderer()
 
-    private fun drawHexagon(polygon: Polygon, color: Color) {
+    private fun createCell(raw: Int, col: Int, cellSize: Float = 1.0f, zoom: Float = 0.9f) : Polygon {
+        val xCenter = raw.toFloat() * cellSize
+        val yCenter = col.toFloat() * cellSize
+
+        val xOffset = zoom * (cellSize / 2)
+        val yOffset = zoom * (cellSize / 2)
+
+        return Polygon(floatArrayOf(
+            xCenter + xOffset, yCenter + yOffset,
+            xCenter - xOffset, yCenter + yOffset,
+            xCenter - xOffset, yCenter - yOffset,
+            xCenter + xOffset, yCenter - yOffset,
+        ))
+    }
+
+    private fun getCellColor(raw: Int, col: Int): Color {
+        if (gameState.gamePhase == GamePhase.NOT_STARTED)
+            return Color.BLACK
+        return Color.BLACK
+    }
+
+    private fun drawPolygon(polygon: Polygon, color: Color) {
         val vertices = FloatArray(polygon.transformedVertices.size)
         polygon.vertices.forEachIndexed { index, value ->
             vertices[index] = value
         }
-
-
         shapeRenderer.projectionMatrix = camera.projMatrix()
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
@@ -83,6 +110,7 @@ class Screen() : KtxScreen {
         shapeRenderer.end()
 
     }
+
     private fun drawCartesianGrid(numCellsX: Int, numCellsY: Int, cellSize: Float, color: Color) {
         shapeRenderer.projectionMatrix = camera.projMatrix()
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
