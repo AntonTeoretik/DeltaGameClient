@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color
 class DynamicColor(color: Color, val duration: Float) {
     var timer = 0.0f
     var animationInProgress = false
-    var currentColor = color
+    var currentColor = color.cpy()
     var nextColor = Color.BLACK.cpy()
 
     fun setNewColor(newColor: Color) {

@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Implement game logic controller, create prototype for graphics component">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/DynamicColor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" afterDir="false" />
+    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Add dynamic color">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Cell.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/CameraController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/CameraController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ColorSettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ColorSettings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DynamicColor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/DynamicColor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683482203772</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add dynamic color">
+      <created>1683632281955</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1683632281955</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -148,6 +154,7 @@
     <MESSAGE value="Exclude configuration details to AppConfig" />
     <MESSAGE value="Some refactor, split functionality into several classes" />
     <MESSAGE value="Implement game logic controller, create prototype for graphics component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement game logic controller, create prototype for graphics component" />
+    <MESSAGE value="Add dynamic color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add dynamic color" />
   </component>
 </project>
