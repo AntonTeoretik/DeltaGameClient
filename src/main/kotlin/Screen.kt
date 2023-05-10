@@ -11,13 +11,13 @@ import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import ktx.app.KtxScreen
-import okhttp3.internal.wait
 
 class Screen(
     val gameState: GameState,
     val gameConfig: AppConfig
 ) : KtxScreen {
-    private var cells: List<Cell>? = null
+    var cells: List<Cell>? = null
+
     private var gameStarted = false
 
     // Camera info
@@ -33,21 +33,21 @@ class Screen(
     // messages
     private var text = gameConfig.playersName
 
-    init {
-        generateCells(11)
-        val randomColors = listOf(
-            ColorSettings.Player1,
-            ColorSettings.Player2,
-            ColorSettings.Player3,
-            ColorSettings.Player4,
-            ColorSettings.Empty
-        )
-
-        cells!!.forEach {
-            it.color.setNewColor(randomColors.random())
-        }
-        gameStarted = true
-    }
+//    init {
+//        generateCells(21)
+//        val randomColors = listOf(
+//            ColorSettings.Player1,
+//            ColorSettings.Player2,
+//            ColorSettings.Player3,
+//            ColorSettings.Player4,
+//            ColorSettings.Empty
+//        )
+//
+//        cells!!.forEach {
+//            it.color.setNewColor(Color.DARK_GRAY)
+//        }
+//        gameStarted = true
+//    }
 
 
     private fun updateInfo() {
@@ -67,18 +67,18 @@ class Screen(
 
     private fun updateCellsColor(delta: Float) {
         cells!!.forEach {
-//            val newColor = getCellColor(it.raw, it.col)
-//            if (!it.color.animationInProgress &&
-//                it.color.currentColor != newColor
-//            )
-//                it.color.setNewColor(newColor)
+            val newColor = getCellColor(it.raw, it.col)
+            if (!it.color.animationInProgress &&
+                it.color.currentColor != newColor
+            )
+                it.color.setNewColor(newColor)
             it.color.update(delta)
         }
     }
 
     private fun renderCells() {
         cells!!.forEach {
-            drawPolygon(createCellPolygon(it.raw, it.col), it.color.getColor())
+            drawPolygon(it.polygon, it.color.getColor())
         }
     }
 
@@ -108,8 +108,6 @@ class Screen(
         // Set the viewport to the correct size and position
         mapPosition.set(camera.getPosition())
 
-
-
         // background
         val col = backgroundColor.getColor()
         Gdx.gl.glClearColor(col.r, col.g, col.b, col.a)
@@ -123,7 +121,7 @@ class Screen(
         }
 
         // grid
-        drawCartesianGrid(10, 10, 1f, Color.BLUE)
+        // drawCartesianGrid(10, 10, 1f, Color.BLUE)
 
         // UI
         uiViewport.apply()
@@ -133,22 +131,6 @@ class Screen(
     private val batch = SpriteBatch()
     private val shapeRenderer = ShapeRenderer()
 
-    private fun createCellPolygon(raw: Int, col: Int, cellSize: Float = 1.0f, zoom: Float = 0.9f): Polygon {
-        val xCenter = raw.toFloat() * cellSize
-        val yCenter = col.toFloat() * cellSize
-
-        val xOffset = zoom * (cellSize / 2)
-        val yOffset = zoom * (cellSize / 2)
-
-        return Polygon(
-            floatArrayOf(
-                xCenter + xOffset, yCenter + yOffset,
-                xCenter - xOffset, yCenter + yOffset,
-                xCenter - xOffset, yCenter - yOffset,
-                xCenter + xOffset, yCenter - yOffset,
-            )
-        )
-    }
 
     private fun getCellColor(raw: Int, col: Int): Color {
         if (

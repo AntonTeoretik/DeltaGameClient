@@ -2,6 +2,7 @@ package com.delta
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Matrix4
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.Viewport
 
@@ -31,16 +32,19 @@ class Camera() {
         camera.update()
     }
 
-    fun unproject(screenCoords: Vector3): Vector3 {
-        camera.unproject(screenCoords)
-        return screenCoords
-    }
-
     fun unprojectScreenCoords(screenX: Int, screenY: Int): Vector3 {
         return camera.unproject(Vector3(screenX.toFloat(), screenY.toFloat(), 0f))
     }
 
     fun updateZoom(cursor: Vector3, amount: Float) {
+        if (camera.zoom < 0.1 &&
+            amount < 0 ||
+            camera.zoom > 10 &&
+            amount > 0
+        ) {
+            return
+        }
+
         val prevZoom = camera.zoom
         camera.zoom = camera.zoom + amount
 
@@ -56,4 +60,11 @@ class Camera() {
         val vec = Vector3(screenX.toFloat(), screenY.toFloat(), 0f)
         return camera.unproject(vec)
     }
+
+    fun screenToWorld2D(screenX: Int, screenY: Int): Vector2 {
+        val vec = Vector3(screenX.toFloat(), screenY.toFloat(), 0f)
+        camera.unproject(vec)
+        return Vector2(vec.x, vec.y)
+    }
+
 }

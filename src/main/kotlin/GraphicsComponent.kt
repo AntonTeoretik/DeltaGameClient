@@ -2,6 +2,7 @@ package com.delta
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
+import kotlinx.coroutines.coroutineScope
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
@@ -20,7 +21,11 @@ class GraphicsComponent (
         addScreen(screen)
         setScreen<Screen>()
 
-        val testBackgroundController = TestBackgroundController(screen)
+        val testBackgroundController = TestBackgroundController(
+            screen,
+            placeCellHandler,
+            finishTurnHandler
+        )
 
         // Set up input handling
         val inputMultiplexer = InputMultiplexer()
