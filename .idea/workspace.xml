@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Implement board rendering">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Application.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Camera.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Camera.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Cell.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Cell.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Application.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +136,8 @@
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.delta.MainKt" />
       <module name="client.main" />
+      <option name="PROGRAM_PARAMETERS" value="Anton" />
+      <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

@@ -5,6 +5,13 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 
+fun someWork() {
+    repeat(1000) {
+        println(1)
+        Thread.sleep(100)
+    }
+}
+
 class Application(appConfig: AppConfig) {
     private var gameController: GameController
     private var graphicsComponent: GraphicsComponent
@@ -15,27 +22,18 @@ class Application(appConfig: AppConfig) {
         graphicsComponent = GraphicsComponent(gameState, appConfig, gameController)
     }
 
-    suspend fun start() {
-        coroutineScope {
-            launch {
-
-                //gameController.start()
-                repeat(1000) {
-                    println(1)
-                    delay(100)
-                }
-            }
-            launch {
-
-                Lwjgl3Application(graphicsComponent, Lwjgl3ApplicationConfiguration().apply {
-                    setTitle("Delta!")
-                    setWindowedMode(640, 480)
-                })
-            }
-
+    fun start() {
+        val thread = Thread {
+            runBlocking { gameController.start() }
         }
 
-    }
+        thread.start()
 
-}
+        Lwjgl3Application(graphicsComponent, Lwjgl3ApplicationConfiguration().apply {
+            setTitle("Delta!")
+            setWindowedMode(640, 480)
+        })
+
+        thread.join()
+    }
 }
