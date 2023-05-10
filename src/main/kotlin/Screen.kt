@@ -11,14 +11,17 @@ import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import ktx.app.KtxScreen
+import kotlin.math.sqrt
 
 class Screen(
     val gameState: GameState,
-    val gameConfig: AppConfig
+    gameConfig: AppConfig
 ) : KtxScreen {
+    private var backgroundColorMy: Boolean = false
     var cells: List<Cell>? = null
 
     private var gameStarted = false
+    private var myColor: Color? = null
 
     // Camera info
     val camera = Camera()
@@ -33,27 +36,41 @@ class Screen(
     // messages
     private var text = gameConfig.playersName
 
-//    init {
-//        generateCells(21)
-//        val randomColors = listOf(
-//            ColorSettings.Player1,
-//            ColorSettings.Player2,
-//            ColorSettings.Player3,
-//            ColorSettings.Player4,
-//            ColorSettings.Empty
-//        )
-//
-//        cells!!.forEach {
-//            it.color.setNewColor(Color.DARK_GRAY)
-//        }
-//        gameStarted = true
-//    }
-
-
     private fun updateInfo() {
-        if (!gameStarted && gameState.gameState != null) {
+        if (!gameStarted &&
+            gameState.gameState != null &&
+            gameState.playerID != null
+        ) {
             gameStarted = true
             generateCells(gameState.gameState!!.getBoardSize())
+            text = gameState.playerID.toString()
+        }
+        if (gameStarted) {
+
+            myColor = when (gameState.playerID) {
+                PlayerID.PLAYER_1 -> ColorSettings.Player1
+                PlayerID.PLAYER_2 -> ColorSettings.Player2
+                PlayerID.PLAYER_3 -> ColorSettings.Player3
+                PlayerID.PLAYER_4 -> ColorSettings.Player4
+                null -> null
+            }
+
+            if (gameState.gamePhase == GamePhase.MY_TURN &&
+                !backgroundColorMy
+            ) {
+                backgroundColorMy = true
+                backgroundColor.setNewColor(myColor!!.cpy().lerp(ColorSettings.Background, 0.6f))
+            } else if (
+                gameState.gamePhase == GamePhase.WAITING_FOR_OTHERS_TURN &&
+                backgroundColorMy
+            ) {
+                backgroundColorMy = false
+                backgroundColor.setNewColor(ColorSettings.Background)
+            }
+
+            text = "${gameState.playerID.toString()}\n" +
+                    "${gameState.gamePhase}\n" +
+                    "${gameState.gameState?.getPlayerResources()}"
         }
     }
 
@@ -77,8 +94,17 @@ class Screen(
     }
 
     private fun renderCells() {
+        drawBorders()
+
         cells!!.forEach {
             drawPolygon(it.polygon, it.color.getColor())
+
+            if (gameState.gameState!!.isProductive(it.raw, it.col)) {
+                drawPolygon(it.smallPolygon, ColorSettings.Background)
+            }
+            if (gameState.gameState!!.isBaseCell(it.raw, it.col)) {
+                drawPolygon(it.mediumPolygon, it.color.getColor().cpy().lerp(ColorSettings.Background, 0.5f))
+            }
         }
     }
 
@@ -144,7 +170,15 @@ class Screen(
             PlayerID.PLAYER_2 -> ColorSettings.Player2
             PlayerID.PLAYER_3 -> ColorSettings.Player3
             PlayerID.PLAYER_4 -> ColorSettings.Player4
-            null -> ColorSettings.Empty
+            null -> {
+                if (gameState.gamePhase == GamePhase.MY_TURN &&
+                    gameState.gameState!!.isValidCellToPlace(raw, col, gameState.playerID!!)
+                ) {
+                    ColorSettings.Background
+                } else {
+                    ColorSettings.Empty
+                }
+            }
         }
     }
 
@@ -171,6 +205,25 @@ class Screen(
 
     }
 
+    private fun drawBorders() {
+        shapeRenderer.projectionMatrix = camera.projMatrix()
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+        shapeRenderer.color = ColorSettings.Empty
+
+        val offset = 0.2f
+        val size = (sqrt(cells!!.size.toFloat()) - 1) * cells!![0].cellSize
+
+        val x0 = -offset - cells!![0].cellSize / 2
+        val x1 = offset + cells!![0].cellSize / 2 + size
+
+        shapeRenderer.rectLine(x0, x0, x1, x0, 0.1f)
+        shapeRenderer.rectLine(x0, x0, x0, x1, 0.1f)
+        shapeRenderer.rectLine(x1, x0, x1, x1, 0.1f)
+        shapeRenderer.rectLine(x0, x1, x1, x1, 0.1f)
+
+        shapeRenderer.end()
+    }
+
     private fun drawCartesianGrid(numCellsX: Int, numCellsY: Int, cellSize: Float, color: Color) {
         shapeRenderer.projectionMatrix = camera.projMatrix()
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
@@ -195,7 +248,7 @@ class Screen(
         batch.projectionMatrix = uiViewport.camera.combined
         batch.begin()
         font.color = Color.YELLOW
-        font.draw(batch, text, 10f, 30f)
+        font.draw(batch, text, 10f, uiViewport.worldHeight - 30f)
         batch.end()
     }
 

@@ -3,14 +3,7 @@ package com.delta
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import kotlinx.coroutines.*
-import okhttp3.internal.wait
 
-fun someWork() {
-    repeat(1000) {
-        println(1)
-        Thread.sleep(100)
-    }
-}
 
 class Application(appConfig: AppConfig) {
     private var gameController: GameController

@@ -3,8 +3,6 @@ package com.delta
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
-import java.security.cert.PolicyNode
 
 class Cell(val raw: Int, val col: Int) {
     val color = DynamicColor(ColorSettings.Empty, 0.3f)
@@ -12,17 +10,15 @@ class Cell(val raw: Int, val col: Int) {
     val cellSize: Float = 1.0f
     val zoom: Float = 0.9f
 
-    val polygon = createCellPolygon()
+    val polygon = createCellPolygon(zoom)
+    val smallPolygon = createCellPolygon(0.2f)
+    val mediumPolygon = createCellPolygon(0.7f)
 
     fun contains(point: Vector2): Boolean {
         return polygon.contains(point)
     }
 
-    fun clickMe() {
-        color.setNewColor(Color.WHITE)
-    }
-
-    private fun createCellPolygon(): Polygon {
+    private fun createCellPolygon(zoom : Float): Polygon {
         val xCenter = raw.toFloat() * cellSize
         val yCenter = col.toFloat() * cellSize
 
