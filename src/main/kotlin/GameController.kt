@@ -56,8 +56,11 @@ class GameController(
         } catch (e: Exception) {
             println("Something went wrong: ${e.message}")
         }
+    }
 
-
+    fun shutdown() {
+        listener.shutdown()
+        httpClient.shutdown()
     }
 }
 

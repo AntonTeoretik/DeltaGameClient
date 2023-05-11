@@ -100,4 +100,8 @@ class ApplicationHttpClient(
         }
     }
 
+    fun shutdown() {
+        client.close()
+    }
+
 }

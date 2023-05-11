@@ -2,7 +2,6 @@ package com.delta
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
-import kotlinx.coroutines.coroutineScope
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
@@ -14,6 +13,7 @@ class GraphicsComponent (
 
     val placeCellHandler = gameController::handlePlaceCellUserRequest
     val finishTurnHandler = gameController::handleFinishTurnRequest
+    val shutdownHandler = gameController::shutdown
 
     override fun create() {
         // Set the initial screen to the menu screen
@@ -32,5 +32,10 @@ class GraphicsComponent (
         inputMultiplexer.addProcessor(CameraController(screen))
         inputMultiplexer.addProcessor(testBackgroundController)
         Gdx.input.inputProcessor = inputMultiplexer
+    }
+
+    override fun dispose() {
+        shutdownHandler()
+        super.dispose()
     }
 }

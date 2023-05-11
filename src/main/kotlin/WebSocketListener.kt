@@ -13,11 +13,11 @@ class WebSocketListener(
     private val appConfig: AppConfig,
     private val updateFunction: KFunction1<GameLogic, Unit>
 ) {
-    suspend fun start() {
-        val client = HttpClient(OkHttp) {
-            install(WebSockets)
-        }
+    private val client = HttpClient(OkHttp) {
+        install(WebSockets)
+    }
 
+    suspend fun start() {
         val serverUri = URI.create("${appConfig.serverAddress}:${AppConfig.webSocketPort}/game")
         client.ws(
             method = HttpMethod.Get,
@@ -48,6 +48,10 @@ class WebSocketListener(
             }
         }
 
+        client.close()
+    }
+
+    fun shutdown() {
         client.close()
     }
 }
