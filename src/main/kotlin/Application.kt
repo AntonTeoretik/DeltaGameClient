@@ -17,16 +17,23 @@ class Application(appConfig: AppConfig) {
 
     fun start() {
         val thread = Thread {
-            runBlocking { gameController.start() }
+            runBlocking {
+                try {
+                    gameController.start()
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
         }
 
         thread.start()
 
-        Lwjgl3Application(graphicsComponent, Lwjgl3ApplicationConfiguration().apply {
+        Lwjgl3Application(graphicsComponent, Lwjgl3ApplicationConfiguration().apply
+        {
             setTitle("Delta!")
             setWindowedMode(640, 480)
         })
 
-        thread.join()
+        thread.interrupt()
     }
 }

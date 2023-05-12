@@ -49,6 +49,18 @@ class ApplicationHttpClient(
         }
     }
 
+    fun tryLogout() : Boolean {
+        return runBlocking {
+            val response: HttpResponse = client.post {
+                url("$fullServerAddress/logout")
+                parameter("id", player?.id)
+                parameter("pwd", player?.pwd)
+            }
+
+            return@runBlocking response.status.isSuccess()
+        }
+    }
+
     fun tryAskPlayerId() : Boolean {
         return runBlocking {
             val response: HttpResponse = client.get {
@@ -101,7 +113,12 @@ class ApplicationHttpClient(
     }
 
     fun shutdown() {
-        client.close()
+        try {
+            client.use { print("Result of try logout: ${tryLogout()}") }
+        } catch (e : Exception) {
+            println("EXCEPTION:\n${e.message}")
+        }
+
     }
 
 }

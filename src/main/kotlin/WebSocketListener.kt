@@ -37,7 +37,7 @@ class WebSocketListener(
                         try {
                             val gameState = Gson().fromJson(text, GameLogic::class.java)
                             updateFunction(gameState)
-                        } catch (e : Exception) {
+                        } catch (e: Exception) {
                             println("Failed to convert message to game state")
                         }
                     }

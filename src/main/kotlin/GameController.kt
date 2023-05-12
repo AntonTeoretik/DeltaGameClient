@@ -1,8 +1,6 @@
 package com.delta
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class GameController(
     val gameState: GameState = GameState(),
@@ -14,14 +12,8 @@ class GameController(
     suspend fun start() {
         httpClient.tryLogin()
         coroutineScope {
-            launch { listener.start() }
             launch {
-                while (gameState.playerID == null) {
-                    httpClient.tryAskPlayerId()
-                    delay(5000)
-                    println("Try ask player id")
-                }
-                println("PlayerID = ${gameState.playerID}")
+                listener.start()
             }
         }
     }
