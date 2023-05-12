@@ -20,7 +20,9 @@ class GameController(
 
     fun handlePlaceCellUserRequest(raw: Int, col: Int): Boolean {
         if (this.gameState.gamePhase != GamePhase.MY_TURN) return false
-        return httpClient.askToPlaceCell(raw, col)
+
+        val response = httpClient.askToPlaceCell(raw, col)
+        return response
     }
 
     fun handleFinishTurnRequest(): Boolean {
@@ -45,6 +47,14 @@ class GameController(
             if (this.gameState.gameState!!.isGameOver()) {
                 this.gameState.gamePhase = GamePhase.FINISHED
             }
+
+            if (
+                this.gameState.gamePhase == GamePhase.MY_TURN &&
+                gameState.getPlayerResources()[this.gameState.playerID] == 0
+            ) {
+                handleFinishTurnRequest()
+            }
+
         } catch (e: Exception) {
             println("Something went wrong: ${e.message}")
         }

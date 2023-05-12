@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Add shutdown handler&#10;&#10;Now client is not left running in background when the window is closed">
+    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Now application does not fail when server is not running">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Application.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/WebSocketListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/WebSocketListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/BoardActionsController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,7 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true">
+    <configuration name="MainKt" type="JetRunConfigurationType" singleton="false" temporary="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="client.main" />
       <shortenClasspath name="NONE" />
@@ -285,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683819240221</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Now application does not fail when server is not running">
+      <created>1683887779425</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683887779425</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -300,6 +306,7 @@
     <MESSAGE value="Run server component in separate thread" />
     <MESSAGE value="Add some design, fix finish turn handler" />
     <MESSAGE value="Add shutdown handler&#10;&#10;Now client is not left running in background when the window is closed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add shutdown handler&#10;&#10;Now client is not left running in background when the window is closed" />
+    <MESSAGE value="Now application does not fail when server is not running" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now application does not fail when server is not running" />
   </component>
 </project>

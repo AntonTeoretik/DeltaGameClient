@@ -2,7 +2,7 @@ package com.delta
 
 import com.badlogic.gdx.InputAdapter
 
-class TestBackgroundController(
+class BoardActionsController(
     private val screen: Screen,
     private val placeCellHandler: (raw: Int, col: Int) -> Boolean,
     private val finishTurnHandler: () -> Boolean,

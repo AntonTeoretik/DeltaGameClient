@@ -21,7 +21,7 @@ class GraphicsComponent (
         addScreen(screen)
         setScreen<Screen>()
 
-        val testBackgroundController = TestBackgroundController(
+        val testBackgroundController = BoardActionsController(
             screen,
             placeCellHandler,
             finishTurnHandler
