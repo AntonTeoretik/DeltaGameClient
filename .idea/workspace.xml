@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Now application does not fail when server is not running">
+    <list default="true" id="ae45ca8f-df39-4c08-82db-0932d515cd59" name="Changes" comment="Rename class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/TestBackgroundController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/BoardActionsController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/AppConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/AppConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ApplicationHttpClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/ApplicationHttpClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/BoardActionsController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/BoardActionsController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Camera.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/Camera.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/CameraController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/CameraController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Cell.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/Cell.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ColorSettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/ColorSettings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DynamicColor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/DynamicColor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/GameController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GamePhase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/GamePhase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GameState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/GameState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphicsComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/GraphicsComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/Screen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/WebSocketListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/delta/WebSocketListener.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +102,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="com.delta" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.delta" />
     </key>
   </component>
@@ -291,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683887779425</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Rename class">
+      <created>1683904255836</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683904255836</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -307,6 +329,7 @@
     <MESSAGE value="Add some design, fix finish turn handler" />
     <MESSAGE value="Add shutdown handler&#10;&#10;Now client is not left running in background when the window is closed" />
     <MESSAGE value="Now application does not fail when server is not running" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now application does not fail when server is not running" />
+    <MESSAGE value="Rename class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename class" />
   </component>
 </project>

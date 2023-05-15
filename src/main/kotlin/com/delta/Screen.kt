@@ -17,11 +17,19 @@ class Screen(
     val gameState: GameState,
     gameConfig: AppConfig
 ) : KtxScreen {
+    private var resourceCellSize: Float = 20f
     private var backgroundColorMy: Boolean = false
     var cells: List<Cell>? = null
 
     private var gameStarted = false
     private var myColor: Color? = null
+
+    private val colorMap = mapOf(
+        PlayerID.PLAYER_1 to ColorSettings.Player1,
+        PlayerID.PLAYER_2 to ColorSettings.Player2,
+        PlayerID.PLAYER_3 to ColorSettings.Player3,
+        PlayerID.PLAYER_4 to ColorSettings.Player4,
+    )
 
     // Camera info
     val camera = Camera()
@@ -69,8 +77,7 @@ class Screen(
             }
 
             text = "${gameState.playerID.toString()}\n" +
-                    "${gameState.gamePhase}\n" +
-                    "${gameState.gameState?.getPlayerResources()}"
+                    "${gameState.gamePhase}\n"
         }
     }
 
@@ -99,11 +106,11 @@ class Screen(
         cells!!.forEach {
             drawPolygon(it.polygon, it.color.getColor())
 
-            if (gameState.gameState!!.isProductive(it.raw, it.col)) {
-                drawPolygon(it.smallPolygon, ColorSettings.Background)
-            }
             if (gameState.gameState!!.isBaseCell(it.raw, it.col)) {
                 drawPolygon(it.mediumPolygon, it.color.getColor().cpy().lerp(ColorSettings.Background, 0.5f))
+            }
+            if (gameState.gameState!!.isProductive(it.raw, it.col)) {
+                drawPolygon(it.smallPolygon, it.color.getColor().cpy().lerp(ColorSettings.Background, 0.5f))
             }
         }
     }
@@ -151,7 +158,46 @@ class Screen(
 
         // UI
         uiViewport.apply()
+        drawResources()
         drawTextTopLeft(batch, BitmapFont(), text)
+    }
+
+    private fun drawResources() {
+        if (gameState.gameState == null) return
+
+        PlayerID.values().forEachIndexed {
+            index, pid ->
+                val res = gameState.gameState!!.getPlayerResources()[pid] ?: 0
+                drawResourcesColumn(index + 1, res, pid)
+        }
+    }
+
+    private fun drawResourcesColumn(index: Int, res: Int, pid: PlayerID) {
+        (1 .. res).forEach {
+            drawPolygon(getResourceSquare(index, it, 0.9f), ColorSettings.Empty, ui = true)
+            drawPolygon(
+                getResourceSquare(index, it, 0.8f),
+                colorMap.getOrDefault(pid, ColorSettings.Empty),
+                ui = true
+            )
+        }
+    }
+
+    private fun getResourceSquare(x: Int, y: Int, zoom: Float) : Polygon {
+        val xCenter = x.toFloat() * resourceCellSize
+        val yCenter = y.toFloat() * resourceCellSize
+
+        val xOffset = zoom * (resourceCellSize / 2)
+        val yOffset = zoom * (resourceCellSize / 2)
+
+        return Polygon(
+            floatArrayOf(
+                xCenter + xOffset, yCenter + yOffset,
+                xCenter - xOffset, yCenter + yOffset,
+                xCenter - xOffset, yCenter - yOffset,
+                xCenter + xOffset, yCenter - yOffset,
+            )
+        )
     }
 
     private val batch = SpriteBatch()
@@ -165,11 +211,7 @@ class Screen(
         )
             return ColorSettings.Background
 
-        return when (gameState.gameState!!.getCell(raw, col)) {
-            PlayerID.PLAYER_1 -> ColorSettings.Player1
-            PlayerID.PLAYER_2 -> ColorSettings.Player2
-            PlayerID.PLAYER_3 -> ColorSettings.Player3
-            PlayerID.PLAYER_4 -> ColorSettings.Player4
+        return when (val pid = gameState.gameState!!.getCell(raw, col)) {
             null -> {
                 if (gameState.gamePhase == GamePhase.MY_TURN &&
                     gameState.gameState!!.isValidCellToPlace(raw, col, gameState.playerID!!)
@@ -179,16 +221,20 @@ class Screen(
                     ColorSettings.Empty
                 }
             }
+            else -> {
+                colorMap[pid]!!
+            }
         }
+
     }
 
-    private fun drawPolygon(polygon: Polygon, color: Color) {
+    private fun drawPolygon(polygon: Polygon, color: Color, ui : Boolean = false) {
         val vertices = FloatArray(polygon.transformedVertices.size)
         polygon.vertices.forEachIndexed { index, value ->
             vertices[index] = value
         }
 
-        shapeRenderer.projectionMatrix = camera.projMatrix()
+        shapeRenderer.projectionMatrix = (if (ui) uiViewport.camera.combined else camera.projMatrix())
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         shapeRenderer.color = color
