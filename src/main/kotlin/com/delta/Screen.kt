@@ -44,6 +44,9 @@ class Screen(
     // messages
     private var text = gameConfig.playersName
 
+    private val batch = SpriteBatch()
+    private val shapeRenderer = ShapeRenderer()
+
     private fun updateInfo() {
         if (!gameStarted &&
             gameState.gameState != null &&
@@ -199,9 +202,6 @@ class Screen(
             )
         )
     }
-
-    private val batch = SpriteBatch()
-    private val shapeRenderer = ShapeRenderer()
 
 
     private fun getCellColor(raw: Int, col: Int): Color {

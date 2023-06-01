@@ -5,18 +5,20 @@ import com.badlogic.gdx.InputMultiplexer
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 
-class GraphicsComponent (
-    gameState: GameState,
-    gameConfig: AppConfig,
-    gameController: GameController
-) : KtxGame<KtxScreen>()  {
+class GraphicsComponent(
+    private val gameState: GameState,
+    private val gameConfig: AppConfig,
+    private val gameController: GameController
+) : KtxGame<KtxScreen>() {
 
-    val placeCellHandler = gameController::handlePlaceCellUserRequest
-    val finishTurnHandler = gameController::handleFinishTurnRequest
     val shutdownHandler = gameController::shutdown
-    val screen = Screen(gameState, gameConfig)
+    private val finishTurnHandler = gameController::handleFinishTurnRequest
+    private val placeCellHandler = gameController::handlePlaceCellUserRequest
 
     override fun create() {
+        val screen = Screen(gameState, gameConfig)
+
+
         // Set the initial screen to the menu screen
         addScreen(screen)
         setScreen<Screen>()
